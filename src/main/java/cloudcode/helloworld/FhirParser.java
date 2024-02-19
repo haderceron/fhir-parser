@@ -1,18 +1,3 @@
-/*
- * Copyright 2023 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package cloudcode.helloworld;
 
 import java.io.IOException;
@@ -35,21 +20,31 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.client.interceptor.BearerTokenAuthInterceptor;
 import ca.uhn.fhir.util.BundleBuilder;
 
+/**
+ * A simple FHIR parser that can create and parse FHIR resources.
+ */
 public class FhirParser {
 
   private static final Logger logger = LoggerFactory.getLogger(FhirParser.class);
 
-  private static final String PROJECT_ID = "hader-poc-001";
-  private static final String DATASET_LOCATION = "us-central1";
-  private static final String DATASET_ID = "test-dataset";
-  private static final String FHIR_STORE_ID = "test-fhir-store";
+  private static final String PROJECT_ID = "<YOUR_PROJECT_ID>";
+  private static final String DATASET_LOCATION = "<YOUR_DATASET_LOCATION>";
+  private static final String DATASET_ID = "<YOUR_DATASET_ID>";
+  private static final String FHIR_STORE_ID = "<YOUR_FHIR_STORE_ID>";
   private static final String FHIR_STORE_NAME = String.format(
       "https://healthcare.googleapis.com/v1beta1/projects/%s/locations/%s/datasets/%s/fhirStores/%s",
       PROJECT_ID, DATASET_LOCATION, DATASET_ID, FHIR_STORE_ID);
 
+  /**
+   * Parses the FHIR resource from the request body.
+   *
+   * @param ctx         The FHIR context.
+   * @param requestBody The request body containing the FHIR resource.
+   * @return The parsed FHIR resource.
+   * @throws IOException if the request fails.
+   */
   public String parseFhirResource(String requestBody) throws Exception {
 
-    
     FhirContext ctx = FhirContext.forR4();
 
     Resource resourceToCreate = parseFHIREntity(ctx, requestBody);
@@ -62,7 +57,14 @@ public class FhirParser {
 
   }
 
-  private void createFHIREntity(FhirContext ctx, Resource resource) throws IOException {
+  /**
+   * Creates a FHIR resource in the FHIR store.
+   *
+   * @param ctx              The FHIR context.
+   * @param resourceToCreate The FHIR resource to create.
+   * @throws IOException if the request fails.
+   */
+  private void createFHIREntity(FhirContext ctx, Resource resourceToCreate) throws IOException {
     try {
 
       String fhirStoreUrl = String.format("%s/fhir", FHIR_STORE_NAME);
@@ -77,16 +79,22 @@ public class FhirParser {
       // Use the client to store a new resource instance
       MethodOutcome outcome = HAPIFhirClient
           .create()
-          .resource(resource)
+          .resource(resourceToCreate)
           .execute();
       IIdType id = outcome.getId();
-       logger.info("Got ID: " + id.getValue());
+      logger.info("Got ID: " + id.getValue());
 
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
+  /**
+   * Gets an access token for the current project.
+   *
+   * @return The access token.
+   * @throws IOException if the request fails.
+   */
   private String getAccessToken() throws IOException {
     GoogleCredentials credential = GoogleCredentials.getApplicationDefault()
         .createScoped(Collections.singleton(CloudHealthcareScopes.CLOUD_PLATFORM));
@@ -109,9 +117,9 @@ public class FhirParser {
       return processPatient((Patient) resourceParsed);
     } else if (resourceParsed instanceof Observation) {
       Observation observation = (Observation) resourceParsed;
-      System.out.println("Observation value: " + observation.getValueQuantity().getValue());
+      logger.info("Observation value: " + observation.getValueQuantity().getValue());
     } else {
-      System.out.println("Unknown resource type");
+      logger.info("Unknown resource type");
     }
     return null;
   }
@@ -125,7 +133,7 @@ public class FhirParser {
   private Resource processPatient(Patient patient) {
     // Execute logic on Patient
     patient.setActive(true);
-    patient.addIdentifier().setSystem("http://demo-fhir").setValue("demo-test");
+    patient.addIdentifier().setSystem("http://fhi-parser").setValue("fhir-parser");
     return patient;
   }
 
