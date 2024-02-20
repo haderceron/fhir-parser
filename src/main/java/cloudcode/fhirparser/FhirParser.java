@@ -27,10 +27,10 @@ public class FhirParser {
 
   private static final Logger logger = LoggerFactory.getLogger(FhirParser.class);
 
-  private static final String PROJECT_ID = "hader-poc-001";
-  private static final String DATASET_LOCATION = "us-central1";
-  private static final String DATASET_ID = "test-dataset";
-  private static final String FHIR_STORE_ID = "test-fhir-store";
+  private static final String PROJECT_ID = "<YOUR_PROJECT_ID>";
+  private static final String DATASET_LOCATION = "<YOUR_DATASET_LOCATION>";
+  private static final String DATASET_ID = "<YOUR_DATASET_ID>";
+  private static final String FHIR_STORE_ID = "<YOUR_FHIR_STORE_ID>";
   private static final String FHIR_STORE_NAME = String.format(
       "https://healthcare.googleapis.com/v1beta1/projects/%s/locations/%s/datasets/%s/fhirStores/%s",
       PROJECT_ID, DATASET_LOCATION, DATASET_ID, FHIR_STORE_ID);
