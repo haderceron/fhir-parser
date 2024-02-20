@@ -1,4 +1,4 @@
-package cloudcode.helloworld.web;
+package cloudcode.fhirparser.web;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

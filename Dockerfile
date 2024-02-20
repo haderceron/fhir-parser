@@ -18,7 +18,7 @@ RUN mvn package -DskipTests
 FROM openjdk:11.0.16-jre-slim
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=build-env /app/target/hello-world-*.jar /hello-world.jar
+COPY --from=build-env /app/target/fhirparser-*.jar /fhirparser.jar
 
 # Run the web service on container startup.
-CMD ["java", "-jar", "/hello-world.jar"]
+CMD ["java", "-jar", "/fhirparser.jar"]
