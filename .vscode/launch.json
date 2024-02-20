@@ -9,9 +9,9 @@
                     "path": "Dockerfile"
                 }
             },
-            "image": "fhir-parser-002",
+            "image": "fhir-parser",
             "service": {
-                "name": "fhir-parser-002",
+                "name": "fhir-parser",
                 "containerPort": 8080,
                 "resources": {
                     "limits": {

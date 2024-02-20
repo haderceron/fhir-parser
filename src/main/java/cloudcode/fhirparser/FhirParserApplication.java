@@ -1,4 +1,4 @@
-package cloudcode.helloworld;
+package cloudcode.fhirparser;
 
 import java.util.Collections;
 import org.slf4j.Logger;
