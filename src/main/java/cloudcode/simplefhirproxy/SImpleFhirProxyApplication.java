@@ -1,4 +1,4 @@
-package cloudcode.fhirparser;
+package cloudcode.simplefhirproxy;
 
 import java.util.Collections;
 import org.slf4j.Logger;
@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /** This class serves as an entry point for the Spring Boot app. */
 @SpringBootApplication
-public class FhirParserApplication {
+public class SImpleFhirProxyApplication {
 
-  private static final Logger logger = LoggerFactory.getLogger(FhirParserApplication.class);
+  private static final Logger logger = LoggerFactory.getLogger(SImpleFhirProxyApplication.class);
 
   public static void main(final String[] args) throws Exception {
     String port = System.getenv("PORT");
@@ -18,7 +18,7 @@ public class FhirParserApplication {
       port = "8080";
       logger.warn("$PORT environment variable not set, defaulting to 8080");
     }
-    SpringApplication app = new SpringApplication(FhirParserApplication.class);
+    SpringApplication app = new SpringApplication(SImpleFhirProxyApplication.class);
     app.setDefaultProperties(Collections.singletonMap("server.port", port));
 
     // Start the Spring Boot application.

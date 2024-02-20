@@ -9,9 +9,9 @@
                     "path": "Dockerfile"
                 }
             },
-            "image": "fhir-parser",
+            "image": "simplefhirproxy",
             "service": {
-                "name": "fhir-parser",
+                "name": "simplefhirproxy",
                 "containerPort": 8080,
                 "resources": {
                     "limits": {
