@@ -1,6 +1,9 @@
 # SimpleFhirProxy
 
-The SimpleFhirProxy is a simple FHIR proxy that allows users to perform transformations in FHIR resources before to be created in a Cloud Healthcare API FHIR store. This doen`t pretend to be a fully fhir proxy implementation, it provides a simple example about a possible implementation using Cloud Run, Java and HAPI Fhir to achieve it. Future work and refinement could include PostProcessing for GET FHIR Resoruces, and other types of transformations (p.e Adapt to a different FHIR versions).
+The SimpleFhirProxy is a lightweight FHIR transformation proxy implemented on Cloud Run using Java and the HAPI FHIR library. It intercepts and modifies FHIR resources prior to their persistence in a Cloud Healthcare API FHIR store. This proxy serves as a foundational example; potential enhancements include:
+
+* Post-processing GET requests: Implement response transformations for retrieved FHIR resources.
+* Cross-version FHIR adaptation: Enable conversion between different FHIR versions to support broader interoperability.
 
 ## Prerequisites
 
