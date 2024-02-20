@@ -19,13 +19,13 @@ To install the SimpleFhirProxy, follow these steps:
 1. Clone the SimpleFhirProxy repository from GitHub:
     
     ```
-    git clone https://github.com/haderceron/simple-fhir-parser.git
+    git clone https://github.com/haderceron/simple-fhir-proxy.git
     ```
 
 2. Change to the directory that contains the SimpleFhirProxy source code:
     
     ```
-    cd simple-fhir-parser
+    cd simple-fhir-proxy
     ```
 
 3. Install the dependencies:
